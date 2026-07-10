@@ -5,7 +5,7 @@ import os
 
 def get_agent():
     llm = ChatGroq(
-        model="llama-3.3-70b-versatile",
+        model="gemma2-9b-it",
         temperature=0.0
     )
     

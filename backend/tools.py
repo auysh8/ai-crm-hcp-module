@@ -86,7 +86,7 @@ def search_past_interactions(hcp_name: str) -> str:
         
         result = f"Found {len(interactions)} past interactions for {hcp_name}:\n"
         for i in interactions:
-            result += f"- [{i.interaction_date}] Discussed: {i.topics_discussed} (Sentiment: {i.sentiment})\n"
+            result += f"- [ID: {i.id}] [{i.interaction_date}] Discussed: {i.topics_discussed} (Sentiment: {i.sentiment})\n"
         return result
     finally:
         db.close()
