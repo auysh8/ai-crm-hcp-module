@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateFormField } from '../store';
+import { updateFormField, resetForm } from '../store';
 
 const StructuredForm = () => {
   const dispatch = useDispatch();
@@ -9,6 +9,28 @@ const StructuredForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(updateFormField({ field: name, value }));
+  };
+
+  const handleSave = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/interactions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+      
+      if (response.ok) {
+        alert("Interaction saved successfully!");
+        dispatch(resetForm());
+      } else {
+        alert("Failed to save interaction. Please check the backend connection.");
+      }
+    } catch (error) {
+      console.error("Error saving interaction:", error);
+      alert("Error saving interaction. Please ensure the backend is running.");
+    }
   };
 
   return (
@@ -140,6 +162,15 @@ const StructuredForm = () => {
           placeholder="Enter next steps or tasks..." 
           className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-blue-500 focus:border-blue-500 h-16 resize-none"
         ></textarea>
+      </div>
+      
+      <div className="pt-4 border-t border-gray-200 flex justify-end">
+        <button 
+          onClick={handleSave}
+          className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors font-medium"
+        >
+          Save Interaction
+        </button>
       </div>
     </div>
   );
