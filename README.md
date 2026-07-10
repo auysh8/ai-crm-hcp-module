@@ -6,13 +6,14 @@ This project is an AI-First Customer Relationship Management (CRM) module tailor
 - **Split-Screen UI**: A structured form on the left and an AI chat assistant on the right.
 - **AI-Powered Data Extraction**: Chat with the assistant to log interactions (e.g., "Met Dr. Smith, discussed Product X efficacy, positive sentiment, set follow-up for next week"). The LangGraph agent automatically extracts the entities and updates the database.
 - **Form Auto-fill**: The form updates automatically when the AI assistant successfully logs an interaction.
-- **5 LangGraph Tools**:
+- **6 LangGraph Tools**:
   1. `log_interaction`: Captures and saves interaction data to the database.
   2. `edit_interaction`: Modifies existing logged data based on conversational commands.
   3. `get_hcp_profile`: Retrieves HCP specialty, location, and preferences.
   4. `search_past_interactions`: Searches through historical interactions for a specific HCP.
-  5. `schedule_follow_up`: Creates a follow-up action or task.
-- **Modern Tech Stack**: React, Redux Toolkit, TailwindCSS v4, Python, FastAPI, SQLAlchemy, SQLite, LangGraph, and Groq.
+  5. `list_all_interactions`: Retrieves a complete list of every log in the entire database.
+  6. `schedule_follow_up`: Creates a follow-up action or task.
+- **Modern Tech Stack**: React, Redux Toolkit, TailwindCSS v4, Python, FastAPI, SQLAlchemy, PostgreSQL, LangGraph, and Groq.
 
 ## Project Structure
 - `backend/`: Python FastAPI application and LangGraph agent.
@@ -22,6 +23,7 @@ This project is an AI-First Customer Relationship Management (CRM) module tailor
 - Node.js (v18+)
 - Python (3.10+)
 - Groq API Key
+- PostgreSQL running locally
 
 ## Setup & Running Locally
 
@@ -32,7 +34,7 @@ Navigate to the backend directory, create a virtual environment, and install dep
 cd backend
 python -m venv venv
 source venv/bin/activate  # On Windows use: venv\Scripts\activate
-pip install fastapi uvicorn pydantic sqlalchemy langgraph groq langchain-groq python-dotenv aiosqlite
+pip install fastapi uvicorn pydantic sqlalchemy langgraph groq langchain-groq python-dotenv psycopg2-binary
 ```
 
 Create a `.env` file in the `backend/` directory and add your Groq API key:
